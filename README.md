@@ -1,6 +1,6 @@
 # SOTU19
 Materials for State of the Union Research
 
-Forked from dcfaltesek/SOTU19's analysis of Trump's State of the Union speech: https://medium.com/s/story/two-states-of-the-union-3b58814f096f
+Originally forked from dcfaltesek/SOTU19's analysis of Trump's State of the Union speech: https://medium.com/s/story/two-states-of-the-union-3b58814f096f
 
-The purpose of this fork is to use this code to analyze Stacey Abrams's rebuttal and compare/contrast with the original graphs to see what could be gathered.
+The purpose of this repo is to analyze Stacey Abrams's rebuttal to compare/contrast with the original graphs from dcfaltesek to see what information could be gathered.
