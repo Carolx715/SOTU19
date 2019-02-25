@@ -18,9 +18,9 @@ View(SPEECH)
 colnames(SPEECH)[1]<-"Text"
 
 #the following code owes much to Slige and Robinsion - READ THEM https://www.tidytextmining.com/sentiment.html
-# For each of these below if there is an "Error: there is no package called ___" 
-# run install.packages("[missing package name here]") and it will install it to the library
-# which can be viewed using the command library()
+# CAROLX715: For each of these below if there is an "Error: there is no package called ___" 
+#   Just run install.packages("[missing package name here]") for each package and it will install it to the library,
+#   which can be viewed using the command library()
 library(tidytext) 
 library(dplyr)
 library(ggplot2)
@@ -119,7 +119,7 @@ SP3%>%
   ggplot(aes(M, score, colour=sentiment))+geom_jitter()
 
 #a FACET MODEL - all that are not positive or negative
-# lots of trust at the end I see
+# CAROLX715: lots of trust at the end I see
 ggplot(SP3, aes(M, score, colour=sentiment))+geom_density_2d()+facet_grid(~sentiment)
 
 #find the positive with a negative value
@@ -174,8 +174,8 @@ V<-SP5%>%
   summarize(sum(E))
 
 #a summary dataset with applause and sentiment 
-# Shows where applause occurred in the speech - occurred more often early on and when sentiment
-#   values were higher
+# CAROLX715: The graph shows where applause occurred in the speech - occurred more often early on and
+#   tended to occur when sentiment values were higher
 SP6<-data.frame(U,V)
 ggplot(SP6, aes(N, mean.score.))+geom_jitter(aes(colour=sum.E.))+
   scale_colour_gradient(low = "white", high = "red")+
