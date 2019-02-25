@@ -5,7 +5,12 @@
 #some of this may be out of order, this is for the most part my actual code scratch.
 
 #for my own sake, I am assigning the base dataset a name
-SPEECH<-Untitled.spreadsheet...Sheet1
+# CAROLX715: Had to make edits to various lines in the file to make it run on mine.
+#   I tried to document these edits as much as I could.
+
+# CAROLX715: Changed location of data and how it was read into SPEECH:
+download.file(url = 'https://raw.githubusercontent.com/Carolx715/SOTU19/master/SOTU19%20-%20Sheet1.csv', destfile = 'SOTU19.csv')
+SPEECH = read.csv("SOTU19.csv", header=F, stringsAsFactors=FALSE)
 
 #Check it
 View(SPEECH)
@@ -13,7 +18,10 @@ View(SPEECH)
 colnames(SPEECH)[1]<-"Text"
 
 #the following code owes much to Slige and Robinsion - READ THEM https://www.tidytextmining.com/sentiment.html
-library(tidytext)
+# For each of these below if there is an "Error: there is no package called ___" 
+# run install.packages("[missing package name here]") and it will install it to the library
+# which can be viewed using the command library()
+library(tidytext) 
 library(dplyr)
 library(ggplot2)
 #because sometimes I just have to use a T pipe.
@@ -27,10 +35,9 @@ N<-1:62
 SPEECH<-mutate(SPEECH, N=N)
 
 #we need a version of this dataset that includes just the words
-tidySPEECH<-SPEECH%>%
-  unnest_tokens(word, Text)
+tidySPEECH<-SPEECH%>%unnest_tokens(word, Text)
 
-#looks good, I apprecieate that the row number is a word count, could be a handy accident, LETS SAVE THAT
+#looks good, I appreciate that the row number is a word count, could be a handy accident, LETS SAVE THAT
 View(tidySPEECH)
 M<-1:4446
 SPEECH_withWordCount<-mutate(tidySPEECH, M=M)%T>%
@@ -100,7 +107,8 @@ SP3%>%
   filter(sentiment != "positive")%>%
   filter(sentiment != "sadness")%>%
   filter(sentiment != "surprise")%>%
-  ggplot(aes(M, score, colour=sentiment))+geom_cols()
+  ggplot(aes(M, score, colour=sentiment))+geom_col() # CAROLX715: changed geom_cols to geom_col and it worked what a typo :P
+# through the above plot can definitely see the drop in positive around 2000 word mark & at end
 
 SP3%>%
   filter(sentiment != "anticipation")%>%
@@ -111,6 +119,7 @@ SP3%>%
   ggplot(aes(M, score, colour=sentiment))+geom_jitter()
 
 #a FACET MODEL - all that are not positive or negative
+# lots of trust at the end I see
 ggplot(SP3, aes(M, score, colour=sentiment))+geom_density_2d()+facet_grid(~sentiment)
 
 #find the positive with a negative value
@@ -144,6 +153,7 @@ colnames(SP4)[2]<-"S"
 ggplot(SP4, aes(N, S))+geom_jitter()+xlab("Paragraph Number")+ylab("Score")
 View(SPEECH)
 
+###########################################################
 #what if we want to know if there was applause in this paragraph and a few other things like the use of the word BORDER
 library(stringr)
 #counts the applause lines in a part of the speech
@@ -163,7 +173,9 @@ V<-SP5%>%
   group_by(N)%>%
   summarize(sum(E))
 
-#a summary dataset with applause and sentiment
+#a summary dataset with applause and sentiment 
+# Shows where applause occurred in the speech - occurred more often early on and when sentiment
+#   values were higher
 SP6<-data.frame(U,V)
 ggplot(SP6, aes(N, mean.score.))+geom_jitter(aes(colour=sum.E.))+
   scale_colour_gradient(low = "white", high = "red")+
@@ -180,7 +192,7 @@ SPSentences<-SPEECH%>%
 
 #add a sentence count
 View(SPSentences)
-I<-1:336
+I<-1:255 # CAROLX715: My version ended up with 255 not 336 sentences for some reason, changed it here
 I<-data.frame(I)
 SPs2<-bind_cols(SPSentences, I)
 
