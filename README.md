@@ -1,5 +1,4 @@
 # SOTU19
-Materials for State of the Union Research
 
 Originally forked from dcfaltesek/SOTU19's analysis of Trump's State of the Union speech: https://medium.com/s/story/two-states-of-the-union-3b58814f096f
 
